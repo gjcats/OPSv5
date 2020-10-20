@@ -1,0 +1,71 @@
+m_aps.o:  m_commonconst.o m_error.o m_fileutils.o
+m_commonconst.o:  binas.o
+m_commonfile.o:  m_error.o m_fileutils.o m_string.o
+m_error.o:  m_commonconst.o
+m_fileutils.o:  m_error.o m_string.o m_utils.o
+m_geoutils.o:  m_commonconst.o
+m_getkey.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_utils.o
+m_ops_building.o:  m_commonfile.o m_error.o m_fileutils.o
+m_ops_emis.o:  binas.o m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_geoutils.o m_ops_building.o m_ops_utils.o
+m_ops_plumerise.o:  binas.o m_commonconst.o m_error.o m_ops_utils.o
+m_ops_utils.o:  binas.o
+m_ops_vchem.o:  m_aps.o
+m_string.o:  m_error.o
+# m_utils.o: ifport		No source found
+m_utils.o:  m_error.o m_string.o
+ops_bgcon.o:  m_aps.o m_commonconst.o
+ops_bgcon_tra.o:  m_aps.o ops_bgcon.o
+ops_bron_rek.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_geoutils.o m_ops_building.o m_ops_utils.o
+ops_brondepl.o:  m_commonconst.o m_error.o
+ops_calc_stats.o:  m_commonconst.o
+ops_conc_ini.o:  m_commonconst.o m_error.o
+ops_conc_rek.o:  m_commonconst.o
+ops_conltexp.o:  binas.o m_commonconst.o m_error.o
+ops_convec.o:  m_commonconst.o
+ops_depoparexp.o:  m_commonconst.o m_commonfile.o m_error.o
+ops_depos_rc.o:  m_commonconst.o m_depac.o
+ops_depu.o:  m_commonconst.o
+ops_gen_fnames.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_string.o
+ops_gen_precip.o:  m_commonconst.o m_error.o
+ops_gen_rcp.o:  m_aps.o m_commonconst.o m_commonfile.o m_error.o m_fileutils.o
+ops_get_arg.o:  m_commonfile.o m_error.o m_fileutils.o m_utils.o
+ops_get_dim.o:  m_aps.o m_commonconst.o m_commonfile.o m_error.o m_fileutils.o
+ops_getlu.o:  m_aps.o m_commonconst.o
+ops_getlu_tra.o:  m_aps.o m_commonconst.o
+ops_getz0.o:  m_aps.o m_commonconst.o m_geoutils.o
+ops_getz0_tra.o:  m_aps.o m_commonconst.o m_geoutils.o
+ops_init.o:  m_commonconst.o m_error.o m_ops_building.o
+ops_logfile.o:  m_commonfile.o m_error.o m_fileutils.o
+# ops_main.o: ifport		No source found
+ops_main.o:  m_aps.o m_commonconst.o m_commonfile.o m_depac.o m_error.o m_fileutils.o m_ops_building.o m_ops_vchem.o m_utils.o
+ops_neutral.o:  m_commonconst.o
+ops_par_chem.o:  m_aps.o m_commonconst.o m_ops_vchem.o
+ops_plot_uitv.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_utils.o
+ops_plrise71.o:  m_commonconst.o
+ops_print_grid.o:  m_commonconst.o m_commonfile.o m_error.o m_utils.o
+ops_print_info.o:  m_commonconst.o m_commonfile.o m_error.o m_utils.o
+ops_print_kop.o:  m_commonconst.o m_commonfile.o
+ops_print_recep.o:  m_commonconst.o m_error.o m_utils.o ops_print_table.o
+ops_print_table.o:  m_commonfile.o m_error.o m_utils.o
+ops_rcp_char_1.o:  binas.o m_aps.o m_commonconst.o m_commonfile.o m_error.o m_geoutils.o
+ops_rcp_char_all.o:  m_aps.o m_commonconst.o m_error.o m_geoutils.o ops_bgcon.o
+ops_read_bg.o:  m_aps.o m_commonconst.o m_commonfile.o m_error.o m_ops_vchem.o m_string.o
+ops_read_ctr.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_getkey.o
+ops_read_emis.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o
+ops_read_meteo.o:  m_commonconst.o m_commonfile.o m_error.o m_fileutils.o m_utils.o
+ops_read_source.o:  m_commonconst.o m_commonfile.o m_error.o m_ops_building.o m_ops_emis.o
+ops_reken.o:  binas.o m_aps.o m_commonconst.o m_commonfile.o m_error.o m_geoutils.o m_ops_building.o m_ops_utils.o m_ops_vchem.o
+ops_resist_rek.o:  m_commonconst.o m_ops_vchem.o
+ops_scalefac.o:  m_commonconst.o
+ops_seccmp.o:  m_commonconst.o m_ops_vchem.o
+ops_src_char.o:  m_aps.o m_commonconst.o m_commonfile.o m_error.o
+ops_stab_rek.o:  m_commonconst.o m_commonfile.o m_error.o m_ops_plumerise.o m_ops_utils.o
+ops_statparexp.o:  binas.o m_commonconst.o m_commonfile.o m_error.o m_ops_plumerise.o
+ops_surface.o:  m_commonconst.o
+ops_tra_char.o:  m_aps.o m_commonconst.o m_commonfile.o m_error.o m_ops_vchem.o
+ops_vertdisp.o:  m_commonconst.o m_error.o
+ops_virtdist.o:  m_commonconst.o
+ops_write_progress.o:  m_commonfile.o m_utils.o
+ops_wv_powerlaw.o:  m_commonconst.o
+ops_wvprofile.o:  m_commonconst.o
+ops_z0corr.o:  m_commonconst.o

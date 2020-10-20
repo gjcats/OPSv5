@@ -1,0 +1,13 @@
+
+Error in subroutine: chk_file_exist
+
+Error: File does not exist
+
+Relevant parameters:
+  filename     = /cygdrive/d/Gebruikers/Apollo/Documents/Luis/Geetacs/OPS/Data8/z0_jr_250_lgn7.opr
+  parameter    = Z0FILE
+  control file = /cygdrive/d/Gebruikers/Apollo/Documents/GitHub/OPS8/example2.ctr
+
+Procedure 'chk_file_exist' was called by:
+  ops_read_ctr
+  ops_main

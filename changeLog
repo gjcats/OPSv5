@@ -1,0 +1,113 @@
+Number of changes to remove *4 in real*4 and to remove useless trailing chars
+real*8	real*4	lines with useless spaces	in file
+0	0	65				binas.f90
+0	20	75				m_aps.f90
+2	16	54				m_commonconst.f90
+0	0	42				m_commonfile.f90
+0	0	362				m_depac.f90
+0	8	138				m_error.f90
+0	0	74				m_fileutils.f90
+19	44	46				m_geoutils.f90
+0	6	174				m_getkey.f90
+0	6	178				m_ops_building.f90
+0	10	111				m_ops_emis.f90
+0	0	139				m_ops_plumerise.f90
+0	0	26				m_ops_utils.f90
+0	0	19				m_ops_vchem.f90
+0	0	71				m_string.f90
+0	15	233				m_utils.f90
+0	3	26				ops_bgcon.f90
+0	8	28				ops_bgcon_tra.f90
+0	26	85				ops_bron_rek.f90
+0	54	161				ops_brondepl.f90
+0	37	41				ops_calc_stats.f90
+0	24	77				ops_conc_ini.f90
+0	73	151				ops_conc_rek.f90
+0	76	198				ops_conltexp.f90
+0	13	47				ops_convec.f90
+0	132	324				ops_depoparexp.f90
+0	25	69				ops_depos_rc.f90
+0	16	36				ops_depu.f90
+0	0	32				ops_gen_fnames.f90
+0	42	38				ops_gen_precip.f90
+0	13	80				ops_gen_rcp.f90
+0	0	47				ops_get_arg.f90
+0	23	89				ops_get_dim.f90
+0	2	26				ops_getlu.f90
+0	7	40				ops_getlu_tra.f90
+0	7	31				ops_getz0.f90
+0	11	31				ops_getz0_tra.f90
+0	29	127				ops_init.f90
+0	0	28				ops_logfile.f90
+20	113	331				ops_main.f90
+0	15	47				ops_neutral.f90
+0	13	38				ops_outp_prep.f90
+0	24	62				ops_par_chem.f90
+0	16	73				ops_plot_uitv.f90
+0	15	47				ops_plrise71.f90
+0	39	57				ops_print_grid.f90
+0	11	41				ops_print_info.f90
+0	0	23				ops_print_kop.f90
+0	42	84				ops_print_recep.f90
+0	36	59				ops_print_table.f90
+0	34	84				ops_rcp_char_1.f90
+0	12	57				ops_rcp_char_all.f90
+0	8	85				ops_read_bg.f90
+0	13	104				ops_read_ctr.f90
+0	8	79				ops_read_emis.f90
+0	40	123				ops_read_meteo.f90
+0	7	35				ops_read_source.f90
+10	210	344				ops_reken.f90
+0	107	216				ops_resist_rek.f90
+0	22	31				ops_scalefac.f90
+0	81	171				ops_seccmp.f90
+0	2	24				ops_src_char.f90
+0	53	103				ops_stab_rek.f90
+0	140	433				ops_statparexp.f90
+0	16	58				ops_surface.f90
+0	8	36				ops_tra_char.f90
+0	15	30				ops_vertdisp.f90
+0	2	25				ops_virtdist.f90
+0	1	37				ops_write_progress.f90
+0	0	17				ops_wv_powerlaw.f90
+0	8	26				ops_wvprofile.f90
+0	19	44				ops_z0corr.f90
+
+Changes for gfortran, coding errors, and better resolution of coordinates
+inum.f90:		added because IFPORT is not loaded under ifdef GNU
+m_aps.f90:		removed InputIsChars define option
+m_commonfile.f90:	removed InputIsChars define option
+m_getkey.f90:		first is LOGICAL, not INTEGER
+			inum is external, needs declaration
+m_utils.f90:		LREC in INTENT(IN)
+			ifdef GNU avoids use of IFPORT
+m_ops_building.f90:	strings in DATA statements must be equal length
+ops_depoparexp.f90:	coordinates of source points are reals
+m_ops_emis.f90:		initial sigma_z may be larger dan hbron for a point source
+			not "call" but "ierr = " ops_openlog
+ops_bgcon.f90:		coding error in if-condition (2x)
+ops_bron_rek.f90:	allow more than 9999 sources
+ops_gen_rcp.f90:	coordinates of receptor points are reals
+			coding error in if-condition (2x)
+ops_get_dim.f90:	coordinates of source points are reals
+			tiny is not as small as -huge
+ops_main.f90:		ifdef GNU avoids use of IFPORT
+			a print of r1mach tells you at what precision you compiled
+			coordinates of source points are reals
+			screen is not cleared if compiled under GNU-define option
+ops_plot_uitv.f90:	coordinates of source points are reals
+ops_print_info.f90:	coordinates of source points are reals
+			allow more than 9999 sources
+ops_print_recep.f90:	print coordinates with higher resolution
+			add units of precipitation (mm/y)
+ops_print_table.f90:	print coordinates with higher resolution
+ops_read_ctr.f90:	array constructor needs equal lengths of strings
+ops_read_source.f90:	allow more than 9999 sources
+ops_reken.f90:		coordinates of source points are reals
+ops_src_char.f90:	coordinates of source points are reals
+
+From mathlib were copied: mess.f optchk.f silup.f silupm.f smess.f
+
+The script Prepctr.pl in testset creates examples1.ctr and examples2.ctr and
+output directories in cwd, from $FSROOT files, obtained by installing
+OPS from RIVM's instructions for OPS version 5.0.0.0
