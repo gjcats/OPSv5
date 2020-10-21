@@ -79,14 +79,14 @@ m_aps.f90:		removed InputIsChars define option
 m_commonfile.f90:	removed InputIsChars define option
 m_getkey.f90:		first is LOGICAL, not INTEGER
 			inum is external, needs declaration
-m_utils.f90:		LREC in INTENT(IN)
+m_utils.f90:		LREC is INTENT(IN)
 			ifdef GNU avoids use of IFPORT
 m_ops_building.f90:	strings in DATA statements must be equal length
-ops_depoparexp.f90:	coordinates of source points are reals
 m_ops_emis.f90:		initial sigma_z may be larger dan hbron for a point source
 			not "call" but "ierr = " ops_openlog
 ops_bgcon.f90:		coding error in if-condition (2x)
 ops_bron_rek.f90:	allow more than 9999 sources
+ops_depoparexp.f90:	coordinates of source points are reals
 ops_gen_rcp.f90:	coordinates of receptor points are reals
 			coding error in if-condition (2x)
 ops_get_dim.f90:	coordinates of source points are reals
