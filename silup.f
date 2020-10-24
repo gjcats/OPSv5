@@ -453,7 +453,9 @@ c                                      Loop to take care of options
          if (KEXTRP .lt. 0) KEXTRP = NDEGI
       end if
       if (ILI .gt. 0) go to 200
-      if (ILI + 2) 1300, 1200, 100
+      if (ILI .lt.-2) goto 1300
+      if (ILI .eq.-2) goto 1200
+c     if (ILI + 2) 1300, 1200, 100
 c
 c                                      Binary search, then sequential
   100    continue
@@ -461,7 +463,9 @@ c                         In binary search XT(ILI) .le. XI .le.  XT(IUI)
 c                         or we are extrapolating
             ILI = 1
             IUI = NTABI
-            if (XT(NTABI) - XT(1)) 110, 1220, 130
+            if (XT(NTABI) .eq. XT(1)) goto 1220
+            if (XT(NTABI) .gt. XT(1)) goto 130
+c           if (XT(NTABI) - XT(1)) 110, 1220, 130
   110       ILI = NTABI
             L = 1
   120       IUI = L

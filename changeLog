@@ -91,10 +91,12 @@ ops_gen_rcp.f90:	coordinates of receptor points are reals
 			coding error in if-condition (2x)
 ops_get_dim.f90:	coordinates of source points are reals
 			tiny is not as small as -huge
+ops_init.f90:		do not assign to empty arrays - to avoid overwrite problems
 ops_main.f90:		ifdef GNU avoids use of IFPORT
 			a print of r1mach tells you at what precision you compiled
 			coordinates of source points are reals
 			screen is not cleared if compiled under GNU-define option
+			do not allocate empty arrays - to avoid overwrite problems
 ops_plot_uitv.f90:	coordinates of source points are reals
 ops_print_info.f90:	coordinates of source points are reals
 			allow more than 9999 sources
