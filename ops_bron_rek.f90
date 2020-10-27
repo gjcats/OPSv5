@@ -112,7 +112,8 @@ real                                             :: Ts_stack                   !
 LOGICAL                                          :: emis_horizontal            ! horizontal outflow of emission
 type(Tbuilding)                                  :: building                   ! structure with building paramaters
 real                                             :: qrv
-CHARACTER*512                                    :: cbuf                       ! character buffer
+! CHARACTER*512                                    :: cbuf                       ! character buffer
+integer                                          :: io_status
 REAL                                             :: valueArray(buildingEffect%nParam)  ! array with parameters needed to compute building effect
 INTEGER                                          :: iParam                     ! index of building parameter
 
@@ -131,18 +132,20 @@ nsbuf = 0
 
 DO WHILE (nsbuf /= LSBUF)
 
-! Read source record cbuf from scratch file
-
-  CALL sysread(fu_scratch, cbuf, eof, error)
-  IF (error%haserror) GOTO 9998
-
-! If end of file has been reached, nothing is left to do here
-
-  IF (eof) RETURN
-
 ! Read source record with RDM coordinates
 
-  READ (cbuf, 50) mm, x, y, qob, qww, hbron, diameter, szopp, D_stack, V_stack, Ts_stack, emis_horizontal, ibtg, ibroncat, iland, idgr, building%length, building%width, building%height, building%orientation
+  READ (fu_scratch, iostat = io_status) mm, x, y, qob, qww, hbron, diameter, szopp, D_stack, V_stack, Ts_stack, emis_horizontal, ibtg, ibroncat, iland, idgr, building%length, building%width, building%height, building%orientation
+
+  IF (io_status < 0) THEN
+    eof = .true.
+    return   ! If end of file has been reached, nothing is left to do here
+  ELSE IF (io_status > 0) THEN
+   CALL SetError('Error reading file', error)
+   CALL ErrorParam('io-status', io_status, error)
+   CALL ErrorCall(ROUTINENAAM, error)
+   IF (error%haserror) GOTO 9998
+  ENDIF
+
   nsbuf = nsbuf + 1
 
   !write(*,'(a,i6,10(1x,e12.5),1x,l2,4(1x,i4),4(1x,e12.5))') 'ops_bron_rek a ',mm, x, y, qob, qww, hbron, diameter, szopp, D_stack, V_stack, Ts_stack, emis_horizontal, &

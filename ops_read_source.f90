@@ -139,7 +139,7 @@ DO WHILE (.NOT. end_of_file)
          category_selected = any((catsel(1:ncatsel)   .eq. 0) .OR. (ibroncat .eq. catsel(1:ncatsel)))
 
          IF (country_selected .AND. category_selected) THEN
-            WRITE (fu_scratch, 50) mm,x,y,qob,qww, hbron, diameter, szopp, D_stack, V_stack, Ts_stack, emis_horizontal, ibtg, ibroncat, iland, idgr, building%length, building%width, building%height, building%orientation
+            WRITE (fu_scratch) mm,x,y,qob,qww, hbron, diameter, szopp, D_stack, V_stack, Ts_stack, emis_horizontal, ibtg, ibroncat, iland, idgr, building%length, building%width, building%height, building%orientation
             numbron = numbron+1
          ENDIF
       ENDIF
