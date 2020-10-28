@@ -108,7 +108,8 @@ ops_read_source.f90:	allow more than 9999 sources
 ops_reken.f90:		coordinates of source points are reals
 ops_src_char.f90:	coordinates of source points are reals
 
-From mathlib were copied: mess.f optchk.f silup.f silupm.f smess.f
+From math77 were copied: mess.f optchk.f silup.f silupm.f smess.f
+			but if you prefer to use math77: https://netlib.org/math/math77.tgz
 
 The script Prepctr.pl in testset creates examples1.ctr and examples2.ctr and
 output directories in cwd, from $FSROOT files, obtained by installing
