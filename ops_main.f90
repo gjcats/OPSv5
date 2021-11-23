@@ -318,7 +318,8 @@ real,      DIMENSION(:,:), POINTER               :: csubsec                    !
 real,      DIMENSION(:), POINTER                 :: nh3bg_rcp
 real,      DIMENSION(:), POINTER                 :: so2bg_rcp
 real,      DIMENSION(:), POINTER                 :: rno2_nox_sum               ! NO2/NOx ratio, weighed sum over classes
-real:: r1mach
+real:: r1mach ! to get machine accuracies
+real:: zdist2 ! to get squared distance between source and receptor
 
 CHARACTER*12, DIMENSION(:), POINTER              :: namrcp                     ! receptor names
 
@@ -625,6 +626,15 @@ DO WHILE (.NOT. eof)
     ! Loop over nsbuf sources in the buffer ++++++++++++++++++++++++
 
     DO mmm = 1, nsbuf
+    
+    ! if source and receptor are too close or too far 
+
+      zdist2 = (xm( ircp ) - bx( mmm ) )**2 + ( ym( ircp ) - by( mmm ) )**2
+      if ( zdist2 < dmin2 .or. zdist2 > dmax2 ) then
+         if ( fu_skiplist > 0 ) then
+            write( fu_skiplist, * ) mmm, "|", bx( mmm),"|", by( mmm ), "|", ircp, "|", xm( ircp ), "|", ym( ircp ), "|", namrcp( ircp )
+         endif   
+      else
 
       ! compute source characteristics
 
