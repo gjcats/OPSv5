@@ -41,7 +41,7 @@
 !-------------------------------------------------------------------------------------------------------------------------------
 SUBROUTINE ops_reken(idep, isec, icm, gasv, intpol, vchemc, iopt_vchem, vchemv, dv, amol1, amol2, amol21, ar, rno2nox, ecvl, iseiz, zf,    &
                   &  trafst, knatdeppar, mb, ugmoldep, dg, irev, scavcoef, koh, croutpri, rcno, rhno2, rchno3,                 &
-                  &  nrrcp, ircp, gxm, gym, xm, ym, zm, frac, nh3bg_rcp, so2bg_rcp, rhno3_rcp,                                 &
+                  &  nrrcp, namrcp, ircp, gxm, gym, xm, ym, zm, frac, nh3bg_rcp, so2bg_rcp, rhno3_rcp,                                 &
                   &  bqrv, bqtr, bx, by, bdiam, bsterkte, bwarmte, bhoogte,                                                    &
                   &  bsigmaz, bD_stack, bV_stack, bTs_stack, bemis_horizontal, bbuilding, buildingEffect,                      &
                   &  btgedr, bdegr,                                                                                            &
@@ -50,7 +50,6 @@ SUBROUTINE ops_reken(idep, isec, icm, gasv, intpol, vchemc, iopt_vchem, vchemv, 
                   &  rc, somvnsec, telvnsec, vvchem, vtel, somvnpri,                                                           &
                   &  telvnpri, ddepri, sdrypri, snatpri, sdrysec, snatsec, cpri, csec, drydep, wetdep, astat, rno2_nox_sum,    &
                   &  precip, routpri, dispg, error)
-
 
 !DEC$ ATTRIBUTES DLLEXPORT:: ops_reken
 
