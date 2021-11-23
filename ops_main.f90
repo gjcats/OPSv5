@@ -652,7 +652,7 @@ DO WHILE (.NOT. eof)
 
       CALL ops_reken(idep, isec, icm, gasv, intpol, vchemc, iopt_vchem, vchemv, dv, amol1, amol2, amol21, ar, rno2nox, ecvl, iseiz, zf,     &
                   &  trafst, knatdeppar, mb, ugmoldep, dg, irev, scavcoef, koh, croutpri, rcno, rhno2, rchno3,                  &
-                  &  nrrcp, ircp, gxm(ircp), gym(ircp), xm(ircp), ym(ircp), zm(ircp),                                           &
+                  &  nrrcp, namrcp, ircp, gxm(ircp), gym(ircp), xm(ircp), ym(ircp), zm(ircp),                                           &
                   &  frac(ircp), nh3bg_rcp(ircp), so2bg_rcp(ircp), rhno3_rcp(ircp),                                             &
                   &  bqrv(mmm), bqtr(mmm), bx(mmm), by(mmm), bdiam(mmm), bsterkte(mmm), bwarmte(mmm), bhoogte(mmm),             &
                   &  bsigmaz(mmm), bD_stack(mmm), bV_stack(mmm), bTs_stack(mmm), bemis_horizontal(mmm), bbuilding(mmm),         &
@@ -664,7 +664,8 @@ DO WHILE (.NOT. eof)
                   &  cpri_d, csec_d, drydep_d, wetdep_d, astat, rno2_nox_sum, precip(ircp), routpri, dispg, error)
       IF (error%haserror) GOTO 3300 ! GOTO deallocate all arrays and do error handling at end of program.
 
-    ENDDO   ! end loop over sources in buffer
+   ENDIF   ! if test on source and receptor too close or too far
+   ENDDO   ! end loop over sources in buffer
 
     ! Write progress (update each 2%)
 
