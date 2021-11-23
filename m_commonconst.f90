@@ -103,6 +103,8 @@ CHARACTER*10                                     :: UNITS(2)                    
 CHARACTER*10                                     :: DEPUNITS(NUNIT)                    ! units for deposition
 CHARACTER*40                                     :: KLIGEB(NKLIGEB)                    ! climate regions in NL (KLIGEB << klimaatgebieden = climate regions)
 
+real                                             :: dmin2                              ! square of distance btwn source and receptor to skip calculations if too near
+real                                             :: dmax2                              ! square of distance btwn source and receptor to skip calculations if too far
 
 ! Set coefficients in conversion function NO2 = beta1*log(NOx) + beta2;
 ! based on LML-measurements in 1993
