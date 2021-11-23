@@ -627,7 +627,7 @@ DO WHILE (.NOT. eof)
 
     DO mmm = 1, nsbuf
     
-    ! if source and receptor are too close or too far 
+    ! if source and recep tor are too close or too far 
 
       zdist2 = (xm( ircp ) - bx( mmm ) )**2 + ( ym( ircp ) - by( mmm ) )**2
       if ( zdist2 < dmin2 .or. zdist2 > dmax2 ) then
