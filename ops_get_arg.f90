@@ -47,6 +47,7 @@ USE m_error
 USE m_fileutils
 USE m_utils
 USE m_commonfile
+USE m_commonconst
 
 IMPLICIT NONE
 
@@ -64,6 +65,9 @@ TYPE (TError), INTENT(OUT)                       :: error                      !
 
 ! LOCAL VARIABLES
 INTEGER*4                                        :: os                         ! operating system: 0 = UNIX, 1 = Windows
+INTEGER*4                                        :: inarg                      ! temporary number of arguments
+INTEGER*4                                        :: jarg                       ! loop index arguments
+INTEGER*4                                        :: jarg1                      ! loop index arguments
 INTEGER*4                                        :: numarg                     ! number of arguments
 INTEGER*4                                        :: ISTAT                      ! return code of GETCWD
 CHARACTER*55                                     :: commandname                ! command name of this program (excluding path)
