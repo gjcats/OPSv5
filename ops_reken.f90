@@ -167,6 +167,8 @@ LOGICAL,   INTENT(IN)                            :: subbron                    !
 real,      INTENT(IN)                            :: uurtot                     ! total number of hours in meteo statistics period ("uur"= hour) [hours]
 real,      INTENT(IN)                            :: routsec                    ! in-cloud (rain-out) scavenging ratio for secondary component
 
+CHARACTER*12, DIMENSION(:), POINTER              :: namrcp                     ! receptor names
+
 ! SUBROUTINE ARGUMENTS - I/O       (INOUT)
 real,      INTENT(INOUT)                         :: rc                         ! surface resistance Rc [s/m]
 double precision,    INTENT(INOUT)               :: somvnsec(NPARTCLASS)       ! summed wet deposition flux secondary component [ug/m2/h]
