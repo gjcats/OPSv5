@@ -122,6 +122,8 @@ DATA map_nh3  / 'bgnh3c1984.ops', 'bgnh3c1994.ops', 'bgnh3c2005.ops', 'bgnh3c201
 DATA map_mass_prec       / 'xxx_mass_prec_yyyy.ops'       /   ! xxx = name primary species (SO2, NOx, NH3), yyyy = year (e.g. 2019)
 DATA map_mass_conv_dtfac / 'xxx_mass_conv_dtfac_yyyy.ops' /
 DATA map_no3_distr       / 'no3_distr_yyyy.ops' /
+INTEGER*4                                      :: fu_skiplist                ! list of source-receptor relations skipped
+DATA fu_skiplist/ 0 /;
 !-------------------------------------------------------------------------------------------------------------------------------
 ! SUBROUTINE  : MakeCommonPath
 ! DESCRIPTION : Generates full file names for the common background or diurnal variation files and checks existence. An error is
