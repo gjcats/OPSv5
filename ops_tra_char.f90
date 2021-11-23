@@ -64,8 +64,8 @@ real,      INTENT(IN)                            :: z0_user                    !
 INTEGER*4, INTENT(IN)                            :: nrrcp                      ! aantal receptorpunten
 real,      INTENT(IN)                            :: x_rcp                      ! array met x-coordinaat van receptorpunten (RDM)
 real,      INTENT(IN)                            :: y_rcp                      ! array met y-coordinaat van receptorpunten (RDM)
-INTEGER*4, INTENT(IN)                            :: x_src                      ! array met x-coordinaat van bronnen in buffer
-INTEGER*4, INTENT(IN)                            :: y_src                      ! array met y-coordinaat van bronnen in buffer
+real,      INTENT(IN)                            :: x_src                      ! array met x-coordinaat van bronnen in buffer
+real,      INTENT(IN)                            :: y_src                      ! array met y-coordinaat van bronnen in buffer
 TYPE (TApsGridInt), INTENT(IN)                   :: lugrid                     ! land use grid
 TYPE (TApsGridInt), INTENT(IN)                   :: z0nlgrid                   ! map of roughness lengths in NL [m]
 TYPE (TApsGridInt), INTENT(IN)                   :: z0eurgrid                  ! map of roughness lengths in Europe [m]
@@ -99,21 +99,21 @@ ELSE
 
 !      Calculate average roughness length and land use for path between source and receptor
 
-  CALL ops_getz0_tra(x_rcp, y_rcp, float(x_src), float(y_src), z0nlgrid, z0eurgrid, z0_tra)
-IF (ANY(icm == (/1,2,3/))) CALL ops_getlu_tra(x_rcp, y_rcp, float(x_src), float(y_src), lugrid, domlu, lu_tra_per)
+  CALL ops_getz0_tra(x_rcp, y_rcp, x_src, y_src, z0nlgrid, z0eurgrid, z0_tra)
+IF (ANY(icm == (/1,2,3/))) CALL ops_getlu_tra(x_rcp, y_rcp, x_src, y_src, lugrid, domlu, lu_tra_per)
 ENDIF
 
 !   Calculate average (actual) concentration levels of SO2, NO2 and NH3 between source and receptor
 !   from background concentration maps which are scaled on the basis of measurements
 
-IF (ANY(icm == (/1,3/)))   CALL ops_bgcon_tra(x_rcp, y_rcp, float(x_src), float(y_src), so2bggrid, so2bgtra)
-IF (ANY(icm == (/2,3/)))   CALL ops_bgcon_tra(x_rcp, y_rcp, float(x_src), float(y_src), no2bggrid, no2bgtra)
-IF (ANY(icm == (/1,2,3/))) CALL ops_bgcon_tra(x_rcp, y_rcp, float(x_src), float(y_src), nh3bggrid, nh3bgtra)
+IF (ANY(icm == (/1,3/)))   CALL ops_bgcon_tra(x_rcp, y_rcp, x_src, y_src, so2bggrid, so2bgtra)
+IF (ANY(icm == (/2,3/)))   CALL ops_bgcon_tra(x_rcp, y_rcp, x_src, y_src, no2bggrid, no2bgtra)
+IF (ANY(icm == (/1,2,3/))) CALL ops_bgcon_tra(x_rcp, y_rcp, x_src, y_src, nh3bggrid, nh3bgtra)
 
 ! Compute average mass_prec and mass_conv_dtfac values ocver trajectory (EMEP option iopt_vchem = 1):
 IF ((icm == 1 .or. icm == 2 .or. icm == 3) .and. iopt_vchem .eq. 1) then
-   CALL ops_bgcon_tra(x_rcp, y_rcp, float(x_src), float(y_src), vchem2%mass_prec_grid, vchem2%mass_prec_tra)
-   CALL ops_bgcon_tra(x_rcp, y_rcp, float(x_src), float(y_src), vchem2%mass_conv_dtfac_grid, vchem2%mass_conv_dtfac_tra)
+   CALL ops_bgcon_tra(x_rcp, y_rcp, x_src, y_src, vchem2%mass_prec_grid, vchem2%mass_prec_tra)
+   CALL ops_bgcon_tra(x_rcp, y_rcp, x_src, y_src, vchem2%mass_conv_dtfac_grid, vchem2%mass_conv_dtfac_tra)
    ! write(*,*) 'ops_tra_char: ',vchem2%mass_prec_tra,vchem2%mass_conv_dtfac_tra,vchem2%mass_conv_dtfac_tra/vchem2%mass_prec_tra
 ENDIF
 
