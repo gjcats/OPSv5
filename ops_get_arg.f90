@@ -72,6 +72,8 @@ CHARACTER*512                                    :: progpath                   !
 CHARACTER*512, DIMENSION(:), POINTER             :: arg                        ! argument list excluding progpath
 CHARACTER*1                                      :: slash                      ! "/" of "\"
 LOGICAL*4                                        :: iexist                     ! TRUE if file exists
+LOGICAL*4                                        :: lrepsk                     ! TRUE if user requested report of skipped sources
+integer*4                                        :: iCLAxp                     ! processing CLA: nr of arguments expected
 
 ! FUNCTIONS
 !     INTEGER*4     GETCWD
@@ -85,6 +87,53 @@ sccsida = '%W%:%E%'//char(0)
 
 CALL GetCLArg(progpath, numarg, arg, error)
 IF (error%haserror) GOTO 9999
+
+! ---------------------------------------------------------- skipdistance: skip unless dmin2 <= d(source,receptor) <= dmax2
+dmin2 = 0
+dmax2 = huge(dmax2)
+lrepsk = .false.
+
+inarg = numarg
+do jarg = 1, numarg
+101 continue
+   iCLAxp = 0
+   if ( jarg <= inarg ) then
+      if ( arg( jarg ) == '-dmin' .or. arg( jarg ) == '-skipdistance' ) then ! for upward compatibility: skipdistance = dmin
+         read( arg( jarg + 1 ), * ) dmin2
+         iCLAxp = 2
+      elseif ( arg( jarg ) == '-dmax' ) then
+         read( arg( jarg + 1 ), * ) dmax2
+         iCLAxp = 2
+      elseif ( arg( jarg ) == '-reportSkipped' ) then
+         lrepsk = .true.
+         iCLAxp = 1
+      endif
+      if ( iCLAxp > 0 ) then
+         inarg = inarg - iCLAxp
+         do jarg1 = jarg, inarg                         ! this shifting back is to serve the following code for optional args
+            arg( jarg1 )  = arg( jarg1 + iCLAxp )
+         enddo
+         goto 101               ! in case of double occurrence: use last one
+      endif
+   endif
+enddo
+numarg = inarg
+
+if ( dmax2 < dmin2 ) then
+  write(IOB_STDOUT,*) 'dmax<dmin: nothing to be done?; dmin = ', dmin2, 'dmax = ', dmax2
+  CALL SetError('dmax<dmin: nothing to be done?', error)
+  GOTO 1000
+endif
+
+if ( lrepsk ) then      ! record skipped src/rcp relations but not if too many
+   fu_skiplist = 10
+!  open( fu_skiplist, file = 'listOfSkipped.csv')
+   write( fu_skiplist, * ) 'nsrc|xsrc|ysrc|nrcp|xrcp|yrcp|labelrcp|d:',dmin2,'..', dmax2
+endif
+
+dmin2 = dmin2**2
+dmax2 = dmax2**2
+! ---------------------------------------------------------- skipdistance: squared distances to avoid sqrt in test in ops_main
 
 ! Retrieve commandname, which is the file part of progpath.
 
